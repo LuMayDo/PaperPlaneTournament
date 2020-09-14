@@ -12,10 +12,14 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        $values = ['name' => 'Luiz'];
+        $entities = [0];
+        $entities[0] = ['name' => 'Simon'];
+        $entities[1] = ['name' => 'Luiz'];
+        $entities[2] = ['name' => 'Lukas'];
+
 
         return $this->render('home.html.twig', [
-            'values' => $values
+            'entities' => $entities
         ]);
     }
 }
