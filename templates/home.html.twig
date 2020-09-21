@@ -3,16 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="./styling.css"/>
+        {% endblock %}
     </head>
     <body>
         {% block body %}
             <table>
-                {% for item in entities %}
                 <tr>
-                    <td> {{ item.name }}</td>
-                    <td>Hallo</td>
+                {% for key in entities.0|keys %}
+                    <th> {{ key }}</th>
+                {% endfor %}
                 </tr>
+
+                {% for item in entities %}
+                    <tr>
+                        {% for row, value in item %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
                 {%  endfor %}
             </table>
         {% endblock %}
