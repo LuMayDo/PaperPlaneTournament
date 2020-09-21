@@ -20,18 +20,19 @@ class PaperPlaneTournamentController extends AbstractController{
 
     public function stats(): Response{
 
-        $model = "Standard";
-        $distance = "5m";
-        $duration = "3s";
-        $name = "Bruno";
-        $date = "19/09/20";
+        $entities = [0];
+        $entities[0] =
+            array(
+                'id' => 0,
+                'name' => 'Luiz',
+                'plane model' => 'xyz',
+                'travelled distance' => 10,
+                'flight duration' => '5s',
+                'date' => '2020-09-20');
 
-        return $this->render('index.html.twig', [
-            'model' => $model,
-            'distance' => $distance,
-            'duration' => $duration,
-            'name' => $name,
-            'date' => $date
+
+        return $this->render('home.html.twig', [
+            'entities' => $entities
         ]);
 
     }
