@@ -20,14 +20,15 @@ class TournamentEntryController extends AbstractController
     }
 
     /**
-     * @Route("/tournament/new/{traveldistance}/{planemodel}/{flightduration}/{participant}/{date}", name="create_tournamententry")
+     * @Route("/tournament/new", name="create_tournamententry")
      */
-    public function createTournamentEntry(float $traveldistance,string $planemodel,float $flightduration, string $participant, string $date): Response
+    public function createTournamentEntry(): Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argum  ent to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
+        /*
         $tournamentEntry = new TournamentEntry();
         $tournamentEntry->setTraveldistance($traveldistance);
         $tournamentEntry->setPlanemodel($planemodel);
@@ -39,9 +40,9 @@ class TournamentEntryController extends AbstractController
         $entityManager->persist($tournamentEntry);
 
         // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $entityManager->flush();*/
 
-        return new Response('Saved new tournamentEntry with id '.$tournamentEntry->getId());
+        return $this->render('create-entry.html.twig');
     }
 
     /**
