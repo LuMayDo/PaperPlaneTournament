@@ -20,16 +20,20 @@ class TournamentEntryController extends AbstractController
     }
 
     /**
-     * @Route("/tournament/new", name="create_tournamententry")
+     * @Route("/tournament/new/{traveldistance}/{planemodel}/{flightduration}/{participant}/{date}", name="create_tournamententry")
      */
-    public function createTournamentEntry(): Response
+    public function createTournamentEntry(float $traveldistance,string $planemodel,float $flightduration, string $participant, string $date): Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
+        // or you can add an argum  ent to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         $tournamentEntry = new TournamentEntry();
-        $tournamentEntry->setTraveldistance(28.4);
+        $tournamentEntry->setTraveldistance($traveldistance);
+        $tournamentEntry->setPlanemodel($planemodel);
+        $tournamentEntry->setFlightduration($flightduration);
+        $tournamentEntry->setParticipant($participant);
+        $tournamentEntry->setDate(new \DateTime($date));
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($tournamentEntry);
@@ -38,5 +42,14 @@ class TournamentEntryController extends AbstractController
         $entityManager->flush();
 
         return new Response('Saved new tournamentEntry with id '.$tournamentEntry->getId());
+    }
+
+    /**
+     * @Route("/tournament/show/{id}", name="show_tournamententry")
+     */
+    public function show(TournamentEntry $tournamentEntry): Response {
+        return $this->render('detailed-entry.html.twig',[
+            'tournamentEntry' => $tournamentEntry
+        ]);
     }
 }

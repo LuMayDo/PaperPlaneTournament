@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\TournamentEntry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,24 +16,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PaperPlaneTournamentController extends AbstractController{
 
     /**
-     * @Route("/results/1")
+     * @Route("/tournament/results/1", name="tournament_result")
      */
-
     public function stats(): Response{
-
-        $entities = [0];
-        $entities[0] =
-            array(
-                'id' => 0,
-                'name' => 'Luiz',
-                'plane model' => 'xyz',
-                'travelled distance' => 10,
-                'flight duration' => '5s',
-                'date' => '2020-09-20');
+        $tournamentEntryRepository = $this->getDoctrine()->getRepository(TournamentEntry::class);
+        $tournamentEntries = $tournamentEntryRepository->findAll();
 
 
-        return $this->render('home.html.twig', [
-            'entities' => $entities
+        return $this->render('results.html.twig', [
+            'tournamentEntries' => $tournamentEntries
         ]);
 
     }

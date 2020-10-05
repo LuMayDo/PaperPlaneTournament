@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: Roboto, serif;
+    background: lightgrey;
+}
+
+.content {
+    margin: 4em;
+}
+
+header {
+    padding: 2em;
+    background: cadetblue;
+}
+
+header > h1 > a {
+    color: white;
+    text-decoration: none;
+}
+
+table, th, td {
+}
+
+tr:nth-child(2n+0) > td {
+    background: lightgrey;
+}
+
+th {
+    border-bottom: white 3px solid;
+}
+
+td {
+    height: 3em;
+    text-align: center;
+    margin: 0;
+    background: rgba(255,255,255,0.4);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
