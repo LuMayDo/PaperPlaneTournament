@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href={{ asset('css/main.css') }} />
 </head>
 <body>
 {% block body %}
@@ -15,9 +16,15 @@
 
     <div class="content">
         {{ form_start(form) }}
-
-
+        <div class="column">
+            {{ form_row(form.participant) }}
+            {{ form_row(form.traveldistance) }}
+            {{ form_row(form.flightduration) }}
+            {{ form_row(form.planemodel) }}
+            {{ form_row(form.Date) }}
+        </div>
         {{ form_end(form) }}
+
     </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}

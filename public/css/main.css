@@ -40,3 +40,14 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
+/* Form CSS */
+form{
+    padding: 2em;
+
+
+}
+
+.column{
+    padding: 1em;
+}
