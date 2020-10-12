@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Roboto, serif;
+    font-family: Roboto, Arial, serif;
     background: lightgrey;
 }
 
@@ -39,4 +39,15 @@ td {
 table {
     border-collapse: collapse;
     width: 100%;
+}
+
+/* Form CSS */
+form{
+    padding: 2em;
+
+
+}
+
+.column{
+    padding: 1em;
 }

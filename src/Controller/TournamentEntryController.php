@@ -3,7 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\TournamentEntry;
+use App\Form\Type\TournamentEntryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,27 +27,35 @@ class TournamentEntryController extends AbstractController
     /**
      * @Route("/tournament/new", name="create_tournamententry")
      */
-    public function createTournamentEntry(): Response
+    public function createTournamentEntry(Request $request): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argum  ent to the action: createProduct(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
+        $tournamententry = new TournamentEntry();
+        $tournamententry->setTraveldistance(0.0);
+        $tournamententry->setPlanemodel("Default");
+        $tournamententry->setFlightduration(0.0);
+        $tournamententry->setParticipant("Name");
+        $tournamententry->setDate(new \DateTime("01.01.2020"));
 
-        /*
-        $tournamentEntry = new TournamentEntry();
-        $tournamentEntry->setTraveldistance($traveldistance);
-        $tournamentEntry->setPlanemodel($planemodel);
-        $tournamentEntry->setFlightduration($flightduration);
-        $tournamentEntry->setParticipant($participant);
-        $tournamentEntry->setDate(new \DateTime($date));
+        $form = $this->createForm(TournamentEntryType::class, $tournamententry);
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($tournamentEntry);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $tournamententry = $form->getData();
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();*/
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($tournamententry);
+            $entityManager->flush();
 
-        return $this->render('create-entry.html.twig');
+            return $this->redirectToRoute('tournament_result');
+        }
+
+        return $this->render('create-entry.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -53,4 +66,6 @@ class TournamentEntryController extends AbstractController
             'tournamentEntry' => $tournamentEntry
         ]);
     }
+
+
 }
