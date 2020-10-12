@@ -16,9 +16,26 @@
     </header>
 
     <div class="content">
-        <p>{{ tournamentEntry.id }}, {{ tournamentEntry.traveldistance }}</p>
+        <table>
+            <tr>
+                <th>participant name</th>
+                <th>travel distance</th>
+                <th>plane model</th>
+                <th>flight duration</th>
+                <th>date</th>
+            </tr>
 
-        <a href="http://127.0.0.1:8000/tournament/results/1">Back</a>
+            <tr>
+                <td>{{ tournamentEntry.participant }}</td>
+                <td>{{ tournamentEntry.traveldistance }}</td>
+                <td>{{ tournamentEntry.planemodel }}</td>
+                <td>{{ tournamentEntry.flightduration }}</td>
+                <td>{{ tournamentEntry.date|date("d.m.Y") }}</td>
+            </tr>
+
+        </table>
+
+        <a href="{{ path('tournament_result') }}">Back</a>
     </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}
