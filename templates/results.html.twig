@@ -37,7 +37,10 @@
                             <td>{{ item.planemodel }}</td>
                             <td>{{ item.flightduration }}</td>
                             <td>{{ item.date|date("d.m.Y") }}</td>
-                            <td><a href="{{ path('show_tournamententry',{id: item.id}) }}">Info</a></td>
+                            <td><a href="{{ path('show_tournamententry',{id: item.id}) }}">
+                                    <button type="button">Info</button>
+                                </a>
+                            </td>
                         </tr>
                     {%  endfor %}
                 </table>
