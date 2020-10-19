@@ -5,6 +5,7 @@
     <title>{% block title %}PPT - Entry #{{ tournamentEntry.id }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href={{ asset('css/main.css') }} />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
 </head>
 <body>
@@ -32,11 +33,10 @@
                 <td>{{ tournamentEntry.flightduration }}</td>
                 <td>{{ tournamentEntry.date|date("d.m.Y") }}</td>
             </tr>
-
         </table>
 
         <a href="{{ path('tournament_result') }}">
-            <button type="button">Back</button>
+            <button type="button"><i class="fa fa-chevron-left"></i></button>
         </a>
     </div>
 {% endblock %}

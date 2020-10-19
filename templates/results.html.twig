@@ -5,6 +5,7 @@
         <title>{% block title %}PPT - Result #1{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href={{ asset('css/main.css') }} />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         {% endblock %}
     </head>
     <body>
@@ -37,9 +38,15 @@
                             <td>{{ item.planemodel }}</td>
                             <td>{{ item.flightduration }}</td>
                             <td>{{ item.date|date("d.m.Y") }}</td>
-                            <td><a href="{{ path('show_tournamententry',{id: item.id}) }}">
-                                    <button type="button">Info</button>
+                            <td>
+                                <a href="{{ path('show_tournamententry',{id: item.id}) }}" style="text-decoration: none;">
+                                    <button type="button" class="btn"><i class="fa fa-info"></i></button>
                                 </a>
+                                {% if admin %}
+                                    <a href="">
+                                        <button type="button" class="btn"><i class="fa fa-trash"></i></button>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {%  endfor %}
