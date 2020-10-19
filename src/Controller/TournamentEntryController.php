@@ -78,5 +78,27 @@ class TournamentEntryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/tournament/delete/{id}.{format}",
+     *    format="html",
+     *     name="delete_tournamententry",
+     *     requirements = {
+     *          "_format": "html|json",
+     *     }
+     *)
+     */
+    public function delete(TournamentEntry $tournamentEntry, string $_format, SerializerInterface $serializer): Response {
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $tmpID = $tournamentEntry->getId();
+
+        $entityManager->remove($tournamentEntry);
+        $entityManager->flush();
+
+        if ($_format === "json") return new Response($serializer->serialize(null,'json'));
+
+        return $this->render('deleted-entry.html.twig', [
+            'id' => $tmpID
+        ]);
+    }
 }
