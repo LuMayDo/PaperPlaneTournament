@@ -65,3 +65,25 @@ form{
 .btn:hover {
     background-color: #3c3c3c;
 }
+
+.form_item{
+    padding: 0.5em;
+    margin: 0.2em;
+    border-radius: 0.5em;
+    border: none;
+}
+
+.column>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 33%;
+}
+
+#tournament_entry_save{
+    margin: 1em;
+    padding: 0.5em;
+}
+.form_item>select{
+    border: none;
+}

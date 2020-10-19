@@ -17,11 +17,11 @@
     <div class="content">
         {{ form_start(form) }}
         <div class="column">
-            {{ form_row(form.participant) }}
-            {{ form_row(form.traveldistance) }}
-            {{ form_row(form.flightduration) }}
-            {{ form_row(form.planemodel) }}
-            {{ form_row(form.Date) }}
+            {{ form_row(form.participant, {'attr': {'class': 'form_item'}}) }}
+            {{ form_row(form.traveldistance, {'attr': {'class': 'form_item'}}) }}
+            {{ form_row(form.flightduration, {'attr': {'class': 'form_item'}}) }}
+            {{ form_row(form.planemodel, {'attr': {'class': 'form_item'}}) }}
+            {{ form_row(form.Date, {'attr': {'class': 'form_item'}}) }}
         </div>
         {{ form_end(form) }}
 
