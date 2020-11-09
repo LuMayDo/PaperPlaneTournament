@@ -43,7 +43,7 @@
                                     <button type="button" class="btn"><i class="fa fa-info"></i></button>
                                 </a>
                                 {% if admin %}
-                                    <a href="">
+                                    <a href="{{ path('delete_tournamententry', {format: 'html', id: item.id}) }}">
                                         <button type="button" class="btn"><i class="fa fa-trash"></i></button>
                                     </a>
                                 {% endif %}

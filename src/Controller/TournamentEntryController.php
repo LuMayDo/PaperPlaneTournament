@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class TournamentEntryController extends AbstractController
 {
@@ -59,13 +62,43 @@ class TournamentEntryController extends AbstractController
     }
 
     /**
-     * @Route("/tournament/show/{id}", name="show_tournamententry")
+     * @Route("/tournament/show/{id}.{_format}",
+     *     format="html",
+     *     name="show_tournamententry",
+     *     requirements = {
+     *         "_format": "html|json",
+     *     }
+     * )
      */
-    public function show(TournamentEntry $tournamentEntry): Response {
+    public function show(TournamentEntry $tournamentEntry, string $_format, SerializerInterface $serializer): Response {
+        if ($_format === "json") return new Response($serializer->serialize($tournamentEntry,'json'));
+
         return $this->render('detailed-entry.html.twig',[
             'tournamentEntry' => $tournamentEntry
         ]);
     }
 
+    /**
+     * @Route("/tournament/delete/{id}.{format}",
+     *    format="html",
+     *     name="delete_tournamententry",
+     *     requirements = {
+     *          "_format": "html|json",
+     *     }
+     *)
+     */
+    public function delete(TournamentEntry $tournamentEntry, string $_format, SerializerInterface $serializer): Response {
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $tmpID = $tournamentEntry->getId();
+
+        $entityManager->remove($tournamentEntry);
+        $entityManager->flush();
+
+        if ($_format === "json") return new Response($serializer->serialize(null,'json'));
+
+        return $this->render('deleted-entry.html.twig', [
+            'id' => $tmpID
+        ]);
+    }
 }
